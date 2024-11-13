@@ -34,10 +34,12 @@ def homeDisplay():
             input("Press any button to go home...")
 
 
-while x < 3:
+#  runs 3 times then locks account (figure out scope for locking account
+while x <= 2:
     print("Welcome to the ATM. Please log in...")
     username = input("Enter Username: ")
     password = input("Enter Password: ")
+
 
     if username == "Dott" and password == "logitin":
         print(f"Hello {username}, Welcome to Tha Bank")
@@ -46,8 +48,12 @@ while x < 3:
     else:
         print("Username or Password did not match")
     x += 1
+    # print(x)
 
-# print("We've temporarily locked your account")
+    if x > 2:
+        print("We've temporarily locked your account")
+        loggedIn = False
+        print(loggedIn)
 
 while loggedIn:
     homeDisplay()
