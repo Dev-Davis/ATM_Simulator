@@ -1,62 +1,104 @@
+import os, sys, time, logging
+from datetime import datetime
 
-loggedIn = False
+##############
+# To do list #
+##############
 
-userSavings = float(20000.00)
-x = 0
+# Ask user to insert card
+# Ask for PIN
+# Choose to show balance, deposit, or withdraw
+# Ask if they want another transaction
+# Repeat if yes, exit if no
+
+# user_savings = float(20000.00)
+# user_balance = float(3500.00)
+# current_balance = None
+# x = 0
+
+print(datetime.now())
+time.sleep(0.7)
+print("Please insert your debit card...")
+time.sleep(3)
+print("Verifying card...")
+time.sleep(2)
 
 
-def homeDisplay():
+def home_display():
+    logged_in = True
+    balance = int(20000)
+
+    time.sleep(1)
     print("What would you like to do? ")
-    print("1. View checking")
-    print("2. View savings")
+    print("1. Check balance")
+    print("2. Deposit")
     print("3. Withdraw")
     print("4. Exit")
 
-    selection = int(input("Please enter a number: \n"))
-    user_checking = float(3500.00)
+    selection = int(input("Enter 1-4: \n"))
 
     match selection:
         case 1:
-            print(user_checking)
-            input("Press any button to go home...")
+            #  check balance
+            time.sleep(1)
+            print(f"Your balance is {balance}")
+            while logged_in:
+                selection = input("Would you like another transaction? (yes/no) : ").lower()
+                if selection == "yes":
+                    time.sleep(0.8)
+                    home_display()
+                elif selection == "no":
+                    break
+                else:
+                    print("Enter yes or no")
         case 2:
-            print(userSavings)
-            input("Press any button to go home...")
+            #  deposit
+            time.sleep(1)
+            deposit = input("Please enter deposit amount: ")
+            print(f"You deposited {deposit}")
+            while logged_in:
+                selection = input("Would you like another transaction? (yes/no) : ").lower()
+                if selection == "yes":
+                    time.sleep(0.8)
+                    home_display()
+                elif selection == "no":
+                    break
+                else:
+                    print("Enter yes or no")
         case 3:
-            withdraw_amount = float(input("How much would you like to withdraw? \n"))
-            user_checking = user_checking - withdraw_amount
-            print(user_checking)
-            input("Press any button to go home...")
-        case 4:
-            print("Thanks for using the ATM. Goodbye!")
-        case _:
-            print("Your input was invalid. Try again")
-            input("Press any button to go home...")
+            time.sleep(1)
+            withdraw = input("Please enter withdrawal amount: ")
+            print(f"You withdrew {withdraw}")
+            while logged_in:
+                selection = input("Would you like another transaction? (yes/no) : ").lower()
+                if selection == "yes":
+                    time.sleep(0.8)
+                    home_display()
+                elif selection == "no":
+                    break
+                else:
+                    print("Enter yes or no")
 
 
-#  runs 3 times then locks account (figure out scope for locking account
-while x <= 2:
-    print("Welcome to the ATM. Please log in...")
-    username = input("Enter Username: ")
-    password = input("Enter Password: ")
+def get_pin():
+    approved = True
+    nums = [1234, 5678, 5432, 4321, 1111, 1357, 2468]
+
+    user_pin = int(input("Please enter your PIN: "))
+    print("Checking PIN...")
+    time.sleep(1)
+    while approved:
+        try:
+            if user_pin in nums:
+                print(f"Hello, welcome to your account")
+                home_display()
+            else:
+                print("Incorrect PIN")
+        except Exception as e:
+            print('Numbers only for PIN')
 
 
-    if username == "Dott" and password == "logitin":
-        print(f"Hello {username}, Welcome to Tha Bank")
-        loggedIn = True
-        break
-    else:
-        print("Username or Password did not match")
-    x += 1
-    # print(x)
-
-    if x > 2:
-        print("We've temporarily locked your account")
-        loggedIn = False
-        print(loggedIn)
-
-while loggedIn:
-    homeDisplay()
+get_pin()
 
 
 
